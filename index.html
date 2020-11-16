@@ -6,7 +6,8 @@
   </head>
   <body>
     <h1 onclick="myPrint()">Click Print!</h1>
-    <webview id="foo" src="https://www.kdocs.cn/p/2002204735" style="display:inline-flex; width:640px; height:480px"></webview>
+    <webview id="foo" src="https://www.kdocs.cn/p/92414469164" style="display:inline-flex; width:640px; height:480px"></webview>
+    <!-- <webview id="foo" src="https://www.kdocs.cn/p/2002204735" style="display:inline-flex; width:640px; height:480px"></webview> -->
     <!-- <webview id="foo" src="http://localhost:8080" style="display:inline-flex; width:640px; height:80vh"></webview> -->
     <script>
       function myPrint(){
@@ -14,6 +15,17 @@
         document.body.appendChild(iframe)
         iframe.contentWindow.document.write('Document print....')
         iframe.contentWindow.print()
+        
+        /*
+          save as pdf / preview
+          11.0.0-beta.23 : crash
+          8.5.3 ：没有打印选项，可
+          9.3.4 : crash
+          issue：https://github.com/electron/electron/pull/26047
+                https://github.com/electron/electron/pull/25989
+          fix在master分支了，但beta版本crash
+
+        */
       }
     </script>
   </body>
