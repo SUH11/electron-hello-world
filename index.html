@@ -5,28 +5,50 @@
     <title>Hello World!2222</title>
   </head>
   <body>
-    <h1 onclick="myPrint()">Click Print!</h1>
-    <webview id="foo" src="https://www.kdocs.cn/p/92414469164" style="display:inline-flex; width:640px; height:480px"></webview>
+    <h1 id="print-demo">Click Print!</h1>
+    <h1 >Click document Print!</h1>
+    <!-- <webview nodeintegration id="foo" src="https://www.kdocs.cn/p/92414469164" style="display:inline-flex; width:640px; height:480px"></webview> -->
     <!-- <webview id="foo" src="https://www.kdocs.cn/p/2002204735" style="display:inline-flex; width:640px; height:480px"></webview> -->
     <!-- <webview id="foo" src="http://localhost:8080" style="display:inline-flex; width:640px; height:80vh"></webview> -->
-    <script>
+    <webview id="foo" src="./index2.html" style="display:inline-flex; width:640px; height:80vh"></webview>
+    <script type="text/javascript">
+      
+      let oPrint = document.getElementById('print-demo')
+      const oWebView = document.getElementById('foo')
+      
+      oPrint.addEventListener('click', myPrint)
+
       function myPrint(){
         let iframe = document.createElement('iframe')
         document.body.appendChild(iframe)
         iframe.contentWindow.document.write('Document print....')
-        iframe.contentWindow.print()
-        
+        // iframe.contentWindow.print()
+        console.log('printing top')
+        console.log('oWebView', oWebView.isCrashed())
         /*
           save as pdf / preview
           11.0.0-beta.23 : crash
-          8.5.3 ：没有打印选项，可
-          9.3.4 : crash
-          issue：https://github.com/electron/electron/pull/26047
-                https://github.com/electron/electron/pull/25989
-          fix在master分支了，但beta版本crash
-
+          8.5.3 ：可打印
+          9.3.4 ： ✖️
+          10.1.3 : ✖️
+          10.1.5 : ✖️
+          11.0.1 : ✖️
         */
       }
+
+      // 这里也会崩溃
+      // document.addEventListener('click', function(evt) {
+      //   console.log('click555')
+      //   window.print();
+      // })
+
+      oWebView.addEventListener('dom-ready', () => {
+        console.log('dom - dom-ready')
+      })
+
+      oWebView.addEventListener('crashed', () => {
+        console.log('crashed......')
+      })
     </script>
   </body>
 </html>

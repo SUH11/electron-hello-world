@@ -1,11 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Document print
-</body>
+    <title>Hello World!2222</title>
+    <style>
+      body {
+        background-color: lightgreen;
+        -webkit-print-color-adjust: exact;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn-print">打印iframe, 我是index2.html</button>
+    <iframe src="./index2-1.html" id="my-iframe"></iframe>
+    <script>
+      let oBtn = document.getElementById('btn-print')
+      let oIframe = document.getElementById('my-iframe')
+
+      oBtn.addEventListener('click', () => {
+        btnClick()
+      })
+
+      function btnClick(){
+        let iframe = document.createElement('iframe')
+        // iframe.setAttribute("style", "width:100%; height:100%; visibility:visible; overflow:hidden;")
+        // iframe.setAttribute('src', './1.pdf')
+        // iframe.type = "application/pdf"
+        // const oBody = document.getElementsByTagName('body')[0]
+        // oBody.appendChild(iframe)
+        // iframe.contentWindow.print()
+
+        oIframe.contentWindow.postMessage({
+          method: 'print'
+        })
+
+      }
+    </script>
+  </body>
 </html>

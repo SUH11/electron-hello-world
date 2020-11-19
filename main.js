@@ -10,8 +10,9 @@ function createWindow() {
             enableRemoteModule: true
         }
     })
-    mainWindow.loadURL(`file://${__dirname}/index.html`)
+    mainWindow.loadURL(`file://${__dirname}/index2-1.html`)
     mainWindow.webContents.openDevTools()
+    
 
     console.log('i am ready')
     setTimeout(() =>{
